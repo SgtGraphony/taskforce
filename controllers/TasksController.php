@@ -16,14 +16,23 @@ class TasksController extends Controller
     public function actionIndex()
     {
        $tasks = new Tasks;
-       $models = $tasks->findAll(['STATUS_ID' => 1]);
+       $tasks->load(Yii::$app->request->post());
 
+       $tasksQuery = $tasks->getSearchQuery();
        $categories = Categories::find()->all();
+
+       $countQuery = clone $tasksQuery;
+       $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 5,'forcePageParam' => false, 'pageSizeParam' => false]);
+       $models = $tasksQuery->offset($pages->offset)->limit($pages->limit)->all();
+       
+
+       
 
         return $this->render('index', [
             'models' => $models,
             'categories' => $categories,
-            'tasks' => $tasks
+            'tasks' => $tasks,
+            'pages' => $pages
             
         ]);
     }
