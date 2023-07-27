@@ -162,4 +162,11 @@ class Tasks extends \yii\db\ActiveRecord
 
         return $query->orderBy('PUBLICATION_DATE DESC');
     }
+
+    public function getModelById()
+    {
+        $query = self::find()->where(['ID' => $this->ID]);
+
+        return $query;
+    }
 }

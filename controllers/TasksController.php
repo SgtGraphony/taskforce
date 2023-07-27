@@ -36,4 +36,10 @@ class TasksController extends Controller
             
         ]);
     }
+
+    public function actionView()
+    {
+        $tasks = new Tasks;
+        $tasks->load(Yii::$app->request->get());
+    }
 }

@@ -2,6 +2,7 @@
 
 use yii\data\Pagination;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\widgets\LinkPager;
 
@@ -13,7 +14,7 @@ use yii\widgets\LinkPager;
         <?php foreach ($models as $model) :?>
         <div class="task-card">
             <div class="header-task">
-                <a  href="#" class="link link--block link--big"><?= HTML::encode($model->TITLE) ;?></a>
+                <a  href="<?= Url::to(['/task/view/', 'id' => $model->ID]) ;?>" class="link link--block link--big"><?= HTML::encode($model->TITLE) ;?></a>
                 <p class="price price--task"><?= $model->BUDGET ;?> ₽</p>
             </div>
             <p class="info-text"><span class="current-time"><?= yii::$app->formatter->asRelativeTime($model->PUBLICATION_DATE) ;?></span></p>
