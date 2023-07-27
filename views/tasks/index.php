@@ -30,25 +30,26 @@ use yii\widgets\LinkPager;
         </div>
         <?php endforeach ;?>
 
-        <?= LinkPager::widget([
-            'pagination' => $pages
-        ]) ;?>
-
         <div class="pagination-wrapper">
-            <ul class="pagination-list">
+
+        <?= LinkPager::widget([
+            'pagination' => $pages,
+            'hideOnSinglePage' => true,
+        ]) ;?>
+            <!-- <ul class="pagination-list">
                 <li class="pagination-item mark">
                     <a href="#" class="link link--page"></a>
                 </li>
 
                 <li class="pagination-item pagination-item--active">
-                    <a href="#" class="link link--page"><?= $pages->getPage() + 1;?></a>
+                    <a href="#" class="link link--page"></a>
                 </li>
 
                 </li>
                 <li class="pagination-item mark">
                     <a href="#" class="link link--page"></a>
                 </li>
-            </ul>
+            </ul> -->
         </div>
     </div>
     <div class="right-column">
