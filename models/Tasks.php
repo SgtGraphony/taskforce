@@ -160,6 +160,6 @@ class Tasks extends \yii\db\ActiveRecord
             $query->andWhere('UNIX_TIMESTAMP(TASKS.PUBLICATION_DATE) > UNIX_TIMESTAMP() - :period', [':period' => $this->filterPeriod]);
         }
 
-        return $query->orderBy('PUBLICATION_DATE DESC')->all();
+        return $query->orderBy('PUBLICATION_DATE DESC');
     }
 }
