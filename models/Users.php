@@ -5,25 +5,25 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "USERS".
+ * This is the model class for table "users".
  *
- * @property int $ID
- * @property string|null $REGISTRATION_DATE
- * @property string $NAME
- * @property string $PASSWORD
- * @property string $EMAIL
- * @property string|null $PICTURE
- * @property string|null $BIRTHDAY
- * @property int|null $PHONE_NUMBER
- * @property string|null $TELEGRAM
- * @property string|null $ABOUT
- * @property int $CITY_ID
+ * @property int $id
+ * @property string|null $registration_dt
+ * @property string $name
+ * @property string $password
+ * @property string $email
+ * @property string|null $picture
+ * @property string|null $birthday
+ * @property int|null $phone_number
+ * @property string|null $telegram
+ * @property string|null $about
+ * @property int $city_id
  *
- * @property CITIES $CITY
- * @property RATINGS[] $RATINGSs
- * @property RATINGS[] $RATINGSs0
- * @property TASKS[] $TASKSs
- * @property TASKS[] $TASKSs0
+ * @property City $city
+ * @property Rating[] $ratings
+ * @property Rating[] $ratings0
+ * @property Task[] $tasks
+ * @property Task[] $tasks0
  */
 class Users extends \yii\db\ActiveRecord
 {
@@ -32,7 +32,7 @@ class Users extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'USERS';
+        return 'users';
     }
 
     /**
@@ -41,13 +41,13 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['REGISTRATION_DATE', 'BIRTHDAY'], 'safe'],
-            [['NAME', 'PASSWORD', 'EMAIL', 'CITY'], 'required'],
-            [['NAME', 'ABOUT'], 'string'],
-            [['PHONE_NUMBER', 'CITY'], 'integer'],
-            [['PASSWORD', 'EMAIL', 'PICTURE', 'TELEGRAM'], 'string', 'max' => 255],
-            [['EMAIL'], 'unique'],
-            [['CITY_ID'], 'exist', 'skipOnError' => true, 'targetClass' => CITIES::class, 'targetAttribute' => ['CITY_ID' => 'ID']],
+            [['registration_dt', 'birthday'], 'safe'],
+            [['name', 'password', 'email', 'city_id'], 'required'],
+            [['name', 'about'], 'string'],
+            [['phone_number', 'city_id'], 'integer'],
+            [['password', 'email', 'picture', 'telegram'], 'string', 'max' => 255],
+            [['email'], 'unique'],
+            [['city_id'], 'exist', 'skipOnError' => true, 'targetClass' => City::class, 'targetAttribute' => ['city_id' => 'id']],
         ];
     }
 
@@ -57,68 +57,73 @@ class Users extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'ID' => 'Идентификатор',
-            'REGISTRATION_DATE' => 'Дата регистрации',
-            'NAME' => 'Имя',
-            'PASSWORD' => 'Пароль',
-            'EMAIL' => 'Электронная почта',
-            'PICTURE' => 'Изображение',
-            'BIRTHDAY' => 'Дата рождения',
-            'PHONE_NUMBER' => 'Номер телефона',
-            'TELEGRAM' => 'Telegram',
-            'ABOUT' => 'Описание',
-            'CITY_ID' => 'город',
+            'id' => 'ID',
+            'registration_dt' => 'Registration Dt',
+            'name' => 'Name',
+            'password' => 'Password',
+            'email' => 'Email',
+            'picture' => 'Picture',
+            'birthday' => 'Birthday',
+            'phone_number' => 'Phone Number',
+            'telegram' => 'Telegram',
+            'about' => 'About',
+            'city_id' => 'City ID',
         ];
     }
 
     /**
-     * Gets query for [[CITY]].
+     * Gets query for [[City]].
      *
-     * @return \yii\db\ActiveQuery|CitiesQuery
+     * @return \yii\db\ActiveQuery|CityQuery
      */
-    public function getCITY()
+    public function getCity()
     {
-        return $this->hasOne(CITIES::class, ['ID' => 'CITY']);
+        return $this->hasOne(City::class, ['id' => 'city_id']);
     }
 
     /**
-     * Gets query for [[RATINGSs]].
+     * Gets query for [[Ratings]].
      *
-     * @return \yii\db\ActiveQuery|RatingsQuery
+     * @return \yii\db\ActiveQuery|RatingQuery
      */
-    public function getRATINGSs()
+    public function getRatings()
     {
-        return $this->hasMany(RATINGS::class, ['RATED_USER' => 'ID']);
+        return $this->hasMany(Rating::class, ['performer_id' => 'id']);
     }
 
     /**
-     * Gets query for [[RATINGSs0]].
+     * Gets query for [[Ratings0]].
      *
-     * @return \yii\db\ActiveQuery|RatingsQuery
+     * @return \yii\db\ActiveQuery|RatingQuery
      */
-    public function getRATINGSs0()
+    public function getRatings0()
     {
-        return $this->hasMany(RATINGS::class, ['RATING_USER' => 'ID']);
+        return $this->hasMany(Rating::class, ['client_id' => 'id']);
     }
 
     /**
-     * Gets query for [[TASKSs]].
+     * Gets query for [[Tasks]].
      *
-     * @return \yii\db\ActiveQuery|TasksQuery
+     * @return \yii\db\ActiveQuery|TaskQuery
      */
-    public function getTASKSs()
+    public function getTasks()
     {
-        return $this->hasMany(TASKS::class, ['CUSTOMER_ID' => 'ID']);
+        return $this->hasMany(Task::class, ['client_id' => 'id']);
     }
 
     /**
-     * Gets query for [[TASKSs0]].
+     * Gets query for [[Tasks0]].
      *
-     * @return \yii\db\ActiveQuery|TasksQuery
+     * @return \yii\db\ActiveQuery|TaskQuery
      */
-    public function getTASKSs0()
+    public function getTasks0()
     {
-        return $this->hasMany(TASKS::class, ['EXECUTIONER_ID' => 'ID']);
+        return $this->hasMany(Task::class, ['performer_id' => 'id']);
+    }
+
+    public function getReply()
+    {
+        return $this->hasMany(Reply::class, ['performer_id' => 'id']);
     }
 
     /**

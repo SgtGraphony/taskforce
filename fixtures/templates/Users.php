@@ -15,7 +15,7 @@ $faker = $faker::create('ru_RU');
 $tableName = 'users';
 
 $data = [
-    'registration_date' => date_format(date_create("now"), "Y-m-d"),
+    'registration_dt' => date_format(date_create("now"), "Y-m-d"),
     'name' => $faker->firstNameMale(),
     'password' => $faker->password(8, 15),
     'email' => $faker->email(),
@@ -23,5 +23,5 @@ $data = [
     'phone_number' => random_int(1, 999),
     'telegram' => $faker->text(),
     'about' => $faker->realText(),
-    'city_ID' => $faker->numberBetween(0, 900)
+    'city_id' => $faker->numberBetween(0, 900)
 ];

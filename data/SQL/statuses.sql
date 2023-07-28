@@ -1,5 +1,5 @@
 INSERT INTO
-STATUSES
+STATUS
 (STATUS)
 VALUES ('new'),
 ('canceled'),

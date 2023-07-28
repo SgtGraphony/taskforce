@@ -90,6 +90,6 @@ class CSVtoSQLConverter
 
 }
 
-$obj = new CSVtoSQLConverter("../data/cities.csv");
+$obj = new CSVtoSQLConverter("../data/city.csv");
 
 var_dump($obj->import());

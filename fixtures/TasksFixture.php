@@ -10,4 +10,7 @@ class TasksFixture extends BasicFixture
 }
 
 $obj = new TasksFixture($data, $tableName);
-var_dump($obj->prepareSQL());
+
+
+    var_dump($obj->prepareSQL());
+

@@ -14,19 +14,19 @@ use yii\widgets\LinkPager;
         <?php foreach ($models as $model) :?>
         <div class="task-card">
             <div class="header-task">
-                <a  href="<?= Url::to(['/task/view/', 'id' => $model->ID]) ;?>" class="link link--block link--big"><?= HTML::encode($model->TITLE) ;?></a>
-                <p class="price price--task"><?= $model->BUDGET ;?> ₽</p>
+                <a  href="<?= Url::to(['/tasks/view/', 'id' => $model->id]) ;?>" class="link link--block link--big"><?= HTML::encode($model->title) ;?></a>
+                <p class="price price--task"><?= $model->budget ;?> ₽</p>
             </div>
-            <p class="info-text"><span class="current-time"><?= yii::$app->formatter->asRelativeTime($model->PUBLICATION_DATE) ;?></span></p>
+            <p class="info-text"><span class="current-time"><?= yii::$app->formatter->asRelativeTime($model->publication_dt) ;?></span></p>
             <p class="task-text">
-                <?= HTML::encode($model->DESCRIPTION) ;?>
+                <?= HTML::encode($model->description) ;?>
             </p>
             <div class="footer-task">
-                <?php if($model->CITY_ID) :?>
-                <p class="info-text town-text"><?= $model->cITY->CITY ;?></p>
+                <?php if($model->city_id) :?>
+                <p class="info-text town-text"><?= $model->city->name ;?></p>
                 <?php endif ;?>
-                <p class="info-text category-text"><?= $model->cATEGORY->CATEGORY ;?></p>
-                <a href="#" class="button button--black">Смотреть Задание</a>
+                <p class="info-text category-text"><?= $model->category->name ;?></p>
+                <a href="<?= Url::to(['/tasks/view/', 'id' => $model->id]) ;?>" class="button button--black">Смотреть Задание</a>
             </div>
         </div>
         <?php endforeach ;?>
@@ -60,7 +60,7 @@ use yii\widgets\LinkPager;
                     <h4 class="head-card">Категории</h4>
                     <div class="form-group">
                         <div class="checkbox-wrapper">
-                            <?=html::activeCheckboxList($tasks, 'CATEGORY_ID', array_column($categories, 'CATEGORY', 'ID'),
+                            <?=html::activeCheckboxList($tasks, 'category_id', array_column($categories, 'name', 'id'),
                             ['tag' => null, 'itemOptions' => ['labelOptions' => ['class' => 'control-label']]]) ;?>
                         </div>
                     </div>
