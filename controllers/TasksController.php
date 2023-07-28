@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Category;
+use app\models\Reply;
 use app\models\Task;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -37,7 +38,9 @@ class TasksController extends Controller
     public function actionView()
     {
         $model = Task::find()->where(['ID' => (yii::$app->request->get())])->one();
-        $replies = $model->reply;
+        $replies = $model->getReply()->orderBy('publication_dt DESC')->all(); 
+
+
 
         return $this->render('view', [
             'model' => $model,

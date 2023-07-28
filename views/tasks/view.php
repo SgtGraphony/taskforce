@@ -32,13 +32,13 @@ use yii\helpers\Html;
                     <p class="reviews">2 отзыва</p>
                 </div>
                 <p class="response-message">
-                    Могу сделать всё в лучшем виде. У меня есть необходимый опыт и инструменты.
+                    <?= HTML::encode($reply->comment);?>
                 </p>
 
             </div>
             <div class="feedback-wrapper">
-                <p class="info-text"><span class="current-time">25 минут </span>назад</p>
-                <p class="price price--small">3700 ₽</p>
+                <p class="info-text"><span class="current-time"><?= yii::$app->formatter->asRelativeTime($reply->publication_dt);?></span></p>
+                <p class="price price--small"><?= $reply->budget ;?>₽</p>
             </div>
             <div class="button-popup">
                 <a href="#" class="button button--blue button--small">Принять</a>
@@ -76,5 +76,3 @@ use yii\helpers\Html;
         </div>
     </div>
 </main>
-
-<?php var_dump($replies) ;?>

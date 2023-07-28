@@ -100,13 +100,4 @@ class Reply extends \yii\db\ActiveRecord
         return new ReplyQuery(get_called_class());
     }
 
-    public function taskReplies() {
-
-        $query = self::find();
-        $query->where(['task_id' => $this->task_id]);
-        $query->join('INNER JOIN', 'users', 'reply.performer_id = user.id');
-
-        return $query->orderBy('publication_dt DESC');
-
-    }
 }
