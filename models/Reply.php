@@ -78,7 +78,7 @@ class Reply extends \yii\db\ActiveRecord
      */
     public function getPerformer()
     {
-        return $this->hasOne(User::class, ['id' => 'performer_id']);
+        return $this->hasOne(Users::class, ['id' => 'performer_id']);
     }
 
     /**

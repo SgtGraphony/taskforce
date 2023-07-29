@@ -19,7 +19,7 @@ class TasksController extends Controller
        $tasks = new Task();
        $tasks->load(Yii::$app->request->post());
 
-       $tasksQuery = $tasks->getSearchQuery();
+       $tasksQuery = $tasks->getSearchQuery()->with('category', 'city');
        $categories = Category::find()->all();
 
        $countQuery = clone $tasksQuery;

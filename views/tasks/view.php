@@ -24,9 +24,9 @@ use yii\helpers\Html;
 
         <?php foreach ($replies as $reply): ?>
         <div class="response-card">
-            <img class="customer-photo" src="/img/man-glasses.png" width="146" height="156" alt="Фото заказчиков">
+            <img class="customer-photo" src="<?= $reply->performer->picture;?>" width="146" height="156" alt="Фото заказчиков">
             <div class="feedback-wrapper">
-                <a href="#" class="link link--block link--big">Астахов Павел</a>
+                <a href="#" class="link link--block link--big"><?= $reply->performer->name ;?></a>
                 <div class="response-wrapper">
                     <div class="stars-rating small"><span class="fill-star">&nbsp;</span><span class="fill-star">&nbsp;</span><span class="fill-star">&nbsp;</span><span class="fill-star">&nbsp;</span><span>&nbsp;</span></div>
                     <p class="reviews">2 отзыва</p>
@@ -76,3 +76,5 @@ use yii\helpers\Html;
         </div>
     </div>
 </main>
+
+<?php var_dump($model) ;?>
